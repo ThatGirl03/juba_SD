@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Enroll Students{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">Enroll Students in {{ module.module_name }}</h2>
+        </div>
+        <div class="card-body">
+            <h3>Enroll New Student</h3>
+            <form method="POST">
+                {{ form.csrf_token }}
+                <div class="mb-3">
+                    {{ form.student_id.label(class="form-label") }}
+                    {{ form.student_id(class="form-select") }}
+                    {% if form.student_id.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.student_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                {{ form.submit(class="btn btn-gold") }}
+            </form>
+
+            <h3 class="mt-4">Currently Enrolled Students</h3>
+            {% if enrolled_students %}
+                <ul class="list-group">
+                    {% for student in enrolled_students %}
+                        <li class="list-group-item">{{ student.name }} {{ student.surname }} ({{ student.user_id }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No students are currently enrolled in this module.</p>
+            {% endif %}
+
+            <a href="{{ url_for('facilitator_modules') }}" class="btn btn-secondary mt-3">Back to My Modules</a>
+        </div>
+    </div>
+{% endblock %}

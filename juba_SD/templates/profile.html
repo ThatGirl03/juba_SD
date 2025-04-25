@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">Your Profile</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>User ID:</strong> {{ user.user_id }}</p>
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>Surname:</strong> {{ user.surname }}</p>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Role:</strong> {{ user.role }}</p>
+            {% if user.number %}
+                <p><strong>Number:</strong> {{ user.number }}</p>
+            {% endif %}
+            {% if user.company_host %}
+                <p><strong>Company Host:</strong> {{ user.company_host }}</p>
+            {% endif %}
+            <a href="{{ url_for('edit_profile') }}" class="btn btn-gold">Edit Profile</a>
+            <a href="{{ url_for('change_password') }}" class="btn btn-secondary">Change Password</a>
+        </div>
+    </div>
+{% endblock %}

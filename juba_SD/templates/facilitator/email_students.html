@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Email Students or Facilitators{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">Email Students or Facilitators</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {{ form.csrf_token }}
+                <div class="form-check mb-3">
+                    {{ form.send_to_students(class="form-check-input") }}
+                    {{ form.send_to_students.label(class="form-check-label") }}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form.send_to_facilitators(class="form-check-input") }}
+                    {{ form.send_to_facilitators.label(class="form-check-label") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.subject.label(class="form-label") }}
+                    {{ form.subject(class="form-control") }}
+                    {% if form.subject.errors %}
+                        <div class="alert alert-danger mt-2">
+                            {% for error in form.subject.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.body.label(class="form-label") }}
+                    {{ form.body(class="form-control", rows=5) }}
+                    {% if form.body.errors %}
+                        <div class="alert alert-danger mt-2">
+                            {% for error in form.body.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="text-center">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New User{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .form-card {
+        background-color: #fff;
+        border: 2px solid #000;
+    }
+
+    .text-gold {
+        color: #d4af37;
+    }
+
+    .btn-gold {
+        background-color: #d4af37;
+        color: #000;
+        border: 1px solid #000;
+    }
+
+    .btn-gold:hover {
+        background-color: #bfa133;
+        color: #000;
+    }
+
+    .form-control, .form-select {
+        border: 1px solid #000;
+        background-color: #fff;
+        color: #000;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .error span {
+        color: red;
+        font-size: 0.9rem;
+    }
+
+    .card-body {
+        padding: 40px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4 form-card">
+        <div class="card-body">
+            <h2 class="text-gold mb-4 border-bottom pb-2">Add New User</h2>
+            <form method="POST" action="{{ url_for('add_user') }}">
+                {{ form.csrf_token }}
+
+                <div class="mb-3">
+                    {{ form.user_id.label(class="form-label") }}
+                    {{ form.user_id(class="form-control form-control-lg") }}
+                    {% if form.user_id.errors %}
+                        <div class="error">
+                            {% for error in form.user_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.name.label(class="form-label") }}
+                    {{ form.name(class="form-control form-control-lg") }}
+                    {% if form.name.errors %}
+                        <div class="error">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.surname.label(class="form-label") }}
+                    {{ form.surname(class="form-control form-control-lg") }}
+                    {% if form.surname.errors %}
+                        <div class="error">
+                            {% for error in form.surname.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.role.label(class="form-label") }}
+                    {{ form.role(class="form-select form-select-lg") }}
+                    {% if form.role.errors %}
+                        <div class="error">
+                            {% for error in form.role.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.number.label(class="form-label") }}
+                    {{ form.number(class="form-control form-control-lg") }}
+                    {% if form.number.errors %}
+                        <div class="error">
+                            {% for error in form.number.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control form-control-lg") }}
+                    {% if form.username.errors %}
+                        <div class="error">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control form-control-lg") }}
+                    {% if form.password.errors %}
+                        <div class="error">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.confirm_password.label(class="form-label") }}
+                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% if form.confirm_password.errors %}
+                        <div class="error">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    {{ form.company_host.label(class="form-label") }}
+                    {{ form.company_host(class="form-control form-control-lg") }}
+                    {% if form.company_host.errors %}
+                        <div class="error">
+                            {% for error in form.company_host.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-gold btn-lg fw-bold") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

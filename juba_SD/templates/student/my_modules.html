@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}My Modules{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">My Enrolled Modules</h2>
+        </div>
+        <div class="card-body">
+            {% if enrolled_modules %}
+                <ul class="list-group">
+                    {% for module in enrolled_modules %}
+                        <li class="list-group-item">
+                            <a href="{{ url_for('view_module', module_id=module.id) }}" class="text-decoration-none text-dark">
+                                <strong>{{ module.module_name }}</strong>
+                                {% if module.description %}
+                                    <p class="mb-0">{{ module.description }}</p>
+                                {% endif %}
+                                <small class="text-muted">Facilitator: {{ module.facilitator.name }} {{ module.facilitator.surname }}</small>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You are not currently enrolled in any modules.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

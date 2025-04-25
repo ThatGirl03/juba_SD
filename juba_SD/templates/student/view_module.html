@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ module.module_name }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">{{ module.module_name }}</h2>
+        </div>
+        <div class="card-body">
+            {% if module.description %}
+                <p><strong>Description:</strong> {{ module.description }}</p>
+            {% endif %}
+            <p><strong>Pass Mark:</strong> {{ module.pass_mark }}%</p>
+            <p><strong>Duration:</strong> {{ module.duration_months }} Months</p>
+            <p><strong>Facilitator:</strong> {{ module.facilitator.name }} {{ module.facilitator.surname }}</p>
+
+            <h3 class="mt-4">Module Files</h3>
+            {% if files %}
+                <ul class="list-group">
+                    {% for file in files %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="bi bi-file-earmark-pdf-fill text-danger me-2"></i> {{ file.file_name }}
+                            </div>
+                            <div>
+                                <a href="{{ url_for('view_file', file_id=file.id) }}" class="btn btn-sm btn-primary">View</a>
+                                <a href="{{ url_for('download_file', file_id=file.id) }}" class="btn btn-sm btn-secondary" download="{{ file.file_name }}">Download</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No files have been uploaded for this module yet.</p>
+            {% endif %}
+
+            <h3 class="mt-4">Available Tests</h3>
+            {% if tests %}
+                <ul class="list-group">
+                    {% for test in tests %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ test.title }}</strong>
+                                {% if test.description %}
+                                    <p class="mb-1">{{ test.description }}</p>
+                                {% endif %}
+                                <small class="text-muted">
+                                    {% if test.start_time and test.end_time %}
+                                        Available from {{ test.start_time.strftime('%Y-%m-%d %H:%M') }} to {{ test.end_time.strftime('%Y-%m-%d %H:%M') }}
+                                    {% elif test.start_time %}
+                                        Available from {{ test.start_time.strftime('%Y-%m-%d %H:%M') }}
+                                    {% elif test.end_time %}
+                                        Available until {{ test.end_time.strftime('%Y-%m-%d %H:%M') }}
+                                    {% endif %}
+                                    | Duration: {{ test.duration_minutes }} minutes
+                                </small>
+                            </div>
+                            {% if test.id in student_attempts and student_attempts[test.id].attempted %}
+                                <span class="badge bg-success rounded-pill">Attempted</span>
+                                <a href="{{ url_for('view_student_test_results', test_id=test.id) }}" class="btn btn-sm btn-outline-primary ms-2">View Result</a>
+                            {% else %}
+                                {% if test.start_time <= now() and test.end_time >= now() %}
+                                    <a href="{{ url_for('attempt_test', test_id=test.id) }}" class="btn btn-sm btn-primary">Attempt Test</a>
+                                {% elif test.start_time > now() %}
+                                    <span class="badge bg-info rounded-pill">Coming Soon</span>
+                                {% else %}
+                                    <span class="badge bg-danger rounded-pill">Closed</span>
+                                {% endif %}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No tests are currently available for this module.</p>
+            {% endif %}
+
+            <a href="{{ url_for('student_modules') }}" class="btn btn-secondary mt-3">Back to My Modules</a>
+        </div>
+    </div>
+{% endblock %}

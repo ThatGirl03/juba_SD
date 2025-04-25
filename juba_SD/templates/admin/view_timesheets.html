@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}View Timesheets{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">Uploaded Timesheets</h2>
+        </div>
+        <div class="card-body">
+            {% if timesheets %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Intern</th>
+                            <th>File Name</th>
+                            <th>Uploaded On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for timesheet in timesheets %}
+                            <tr>
+                                <td>{{ timesheet.intern.name }} {{ timesheet.intern.surname }}</td>
+                                <td>{{ timesheet.file_name }}</td>
+                                <td>{{ timesheet.upload_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>
+                                    <a href="{{ url_for('download_timesheet', timesheet_id=timesheet.id) }}" class="btn btn-sm btn-primary">Download</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No timesheets have been uploaded yet.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

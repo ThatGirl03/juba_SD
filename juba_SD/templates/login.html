@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juba Skill Development | Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"
+/>
+</head>
+<body>
+  <div class="left-section">
+    <div>
+      <div class="logo">
+        <img src="{{ url_for('static', filename='home.jpg') }}" alt="Juba Skills Logo" />
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#programs">Programs</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="description">
+        <h2>Welcome to JUBA SKILLS Development</h2>
+        <p>
+          Juba Skill Development is a community empowerment initiative under the JCI umbrella. Our vision is to develop leadership, entrepreneurial, and vocational skills to uplift young people. Join us in our journey to build better leaders for tomorrow.
+        </p>
+      </div>
+    </div>
+    <div class="footer">
+      <p>Contact: info@jcijuba.org | +27 123 456 789</p>
+      <p>Address: 123 Leadership Lane, Durban, South Africa</p>
+      <p>© 2025 Juba Skills. All Rights Reserved.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="right-section">
+    <div class="login-container">
+      <h2>Login</h2>
+      <form method="POST" action="{{ url_for('login') }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+          {{ form.username.label }}
+          {{ form.username(size=32) }}
+          {% if form.username.errors %}
+          <ul class="errors">
+            {% for error in form.username.errors %}
+            <li class="error">{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.password.label }}
+          {{ form.password(size=32) }}
+          {% if form.password.errors %}
+          <ul class="errors">
+            {% for error in form.password.errors %}
+            <li class="error">{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {{ form.submit(class="btn") }}
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</body>
+</html>

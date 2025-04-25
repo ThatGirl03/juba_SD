@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Grade Test - {{ test.title }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">Grade Submissions for {{ test.title }}</h2>
+        </div>
+        <div class="card-body">
+            {% if student_tests %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Submitted On</th>
+                            <th>Grade</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for st in student_tests %}
+                            <tr>
+                                <td>{{ st.student.name }} {{ st.student.surname }} ({{ st.student.user_id }})</td>
+                                <td>{{ st.submit_time.strftime('%Y-%m-%d %H:%M') if st.submit_time }}</td>
+                                <td>
+                                    {% if st.grade is not none %}
+                                        {{ st.grade }}%
+                                    {% else %}
+                                        <span class="text-muted">Not Graded</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('grade_student_test', student_test_id=st.id) }}" class="btn btn-sm btn-success">Grade Now</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No students have submitted this test yet.</p>
+            {% endif %}
+            <a href="{{ url_for('manage_tests', module_id=test.module_id) }}" class="btn btn-secondary mt-3">Back to Tests</a>
+        </div>
+    </div>
+{% endblock %}

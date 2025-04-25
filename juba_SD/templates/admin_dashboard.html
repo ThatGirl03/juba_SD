@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+  <div class="text-center" style="color: rgb(202, 137, 16);">
+    <h1>Welcome, {{ user.name }} (Admin)!</h1>
+    <p>This is the admin dashboard. You have access to user management features.</p>
+    <p>From here, you can add new users with different roles.</p>
+    <a href="{{ url_for('add_user') }}" style="
+        background-color: #d4af37;
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 15px;
+      ">Add New User</a> <br><br><br><br><br><br><br><br><br>
+  </div>
+{% endblock %}

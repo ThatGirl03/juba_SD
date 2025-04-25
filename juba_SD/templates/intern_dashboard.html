@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Intern Dashboard{% endblock %}
+
+{% block content %}
+    <div style="color: rgb(17, 17, 17);">
+        <h1>Welcome, {{ user.name }} (Intern)!</h1>
+        <p>This is your intern dashboard.</p>
+        {% if user.company_host %}
+            <p>Your hosting company is: {{ user.company_host }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

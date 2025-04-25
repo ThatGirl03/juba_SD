@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Test Results - {{ test.title }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">Test Results for {{ test.title }}</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Submitted On:</strong> {{ student_test.submit_time.strftime('%Y-%m-%d %H:%M') if student_test.submit_time }}</p>
+            <p><strong>Grade:</strong>
+                {% if student_test.grade is not none %}
+                    {{ student_test.grade }}%
+                {% else %}
+                    <span class="text-muted">Not Graded</span>
+                {% endif %}
+            </p>
+            <p class="text-muted">You cannot review the questions or your answers at this time.</p>
+            <a href="{{ url_for('student_modules') }}" class="btn btn-secondary mt-3">Back to My Modules</a>
+            <a href="{{ url_for('view_my_tests') }}" class="btn btn-outline-secondary mt-3 ms-2">View My Test History</a>
+        </div>
+    </div>
+{% endblock %}

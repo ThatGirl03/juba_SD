@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ test.title }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">{{ test.title }}</h2>
+            <p class="mb-0">Time Limit: {{ test.duration_minutes }} minutes</p>
+            {% if test.end_time %}
+                <p class="mb-0 text-muted">Test ends at: {{ test.end_time.strftime('%Y-%m-%d %H:%M') }}</p>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {{ form.csrf_token }}
+                {% for field in form if field.name.startswith('question_') %}
+                    <div class="mb-4">
+                        {{ field.label(class="form-label fw-bold") }}
+                        {% for subfield in field %}
+                            <div class="form-check">
+                                {{ subfield(class="form-check-input") }}
+                                {{ subfield.label(class="form-check-label") }}
+                            </div>
+                        {% endfor %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                {{ form.submit(class="btn btn-gold") }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

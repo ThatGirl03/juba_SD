@@ -1,0 +1,173 @@
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      background-color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .left-section {
+      width: 70%;
+      background-color: #000;
+      color: white;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: slideInLeft 1s ease;
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: #d4af37;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .description {
+      margin-top: 60px;
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 600px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .footer {
+      font-size: 14px;
+      border-top: 1px solid #444;
+      padding-top: 20px;
+      color: #ccc;
+    }
+
+    .divider {
+      width: 5px;
+      background-color: black;
+    }
+
+    .right-section {
+      width: 30%;
+      background-color: #f4f4f4;
+      padding: 60px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: slideInRight 1s ease;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+
+    .btn {
+      background-color: #000;
+      color: #d4af37;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #222;
+    }
+
+    .error {
+      color: red;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .left-section,
+      .right-section {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .divider {
+        display: none;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+    }
+  </style>

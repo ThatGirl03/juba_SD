@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}My Modules{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">My Facilitated Modules</h2>
+        </div>
+        <div class="card-body">
+            {% if modules %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Duration</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for module in modules %}
+                            <tr>
+                                <td>{{ module.id }}</td>
+                                <td>{{ module.module_name }}</td>
+                                <td>{{ module.description | default('No description provided', True) }}</td>
+                                <td>{{ module.duration_months }} Months</td>
+                                <td>
+                                    <a href="{{ url_for('enroll_students', module_id=module.id) }}" class="btn btn-sm btn-primary">Enroll Students</a>
+                                    <a href="{{ url_for('upload_module_file', module_id=module.id) }}" class="btn btn-sm btn-info">Manage Files</a>
+                                    <a href="{{ url_for('manage_tests', module_id=module.id) }}" class="btn btn-sm btn-warning">Manage Tests</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>You are not facilitating any modules yet.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

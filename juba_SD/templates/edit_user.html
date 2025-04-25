@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-dark gold-underline mb-4">Edit User: {{ user.name }} {{ user.surname }}</h1>
+        <form method="POST">
+            {{ form.csrf_token }}
+            <div class="mb-3">
+                {{ form.user_id.label(class="form-label text-dark") }}
+                {{ form.user_id(class="form-control form-control-lg", readonly=true) }}
+                {% if form.user_id.errors %}
+                    <div class="error text-danger">
+                        {% for error in form.user_id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.name.label(class="form-label text-dark") }}
+                {{ form.name(class="form-control form-control-lg") }}
+                {% if form.name.errors %}
+                    <div class="error text-danger">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.surname.label(class="form-label text-dark") }}
+                {{ form.surname(class="form-control form-control-lg") }}
+                {% if form.surname.errors %}
+                    <div class="error text-danger">
+                        {% for error in form.surname.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.role.label(class="form-label text-dark") }}
+                {{ form.role(class="form-select form-select-lg") }}
+                {% if form.role.errors %}
+                    <div class="error text-danger">
+                        {% for error in form.role.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.number.label(class="form-label text-dark") }}
+                {{ form.number(class="form-control form-control-lg") }}
+                {% if form.number.errors %}
+                    <div class="error text-danger">
+                        {% for error in form.number.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.username.label(class="form-label text-dark") }}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% if form.username.errors %}
+                    <div class="error text-danger">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.company_host.label(class="form-label text-dark") }}
+                {{ form.company_host(class="form-control form-control-lg") }}
+                {% if form.company_host.errors %}
+                    <div class="error text-danger">
+                        {% for error in form.company_host.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-dark btn-lg">Update User</button>
+            <a href="{{ url_for('manage_users') }}" class="btn btn-secondary btn-lg ms-2">Cancel</a>
+        </form>
+    </div>
+{% endblock %}
+
+<style>
+    .gold-underline {
+        border-bottom: 3px solid #FFD700; /* Dark Gold */
+        padding-bottom: 0.3em;
+    }
+</style>

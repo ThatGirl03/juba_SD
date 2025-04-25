@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Module{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-gold text-center">
+            <h2 class="card-title">Edit Module: {{ module.module_name }}</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {{ form.csrf_token }}
+                <div class="mb-3">
+                    {{ form.module_name.label(class="form-label") }}
+                    {{ form.module_name(class="form-control", value=module.module_name) }}
+                    {% if form.module_name.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.module_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.description.label(class="form-label") }}
+                    {{ form.description(class="form-control", rows="3", value=module.description) }}
+                    {% if form.description.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.description.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.pass_mark.label(class="form-label") }}
+                    {{ form.pass_mark(class="form-control", value=module.pass_mark) }}
+                    {% if form.pass_mark.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.pass_mark.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.facilitator_id.label(class="form-label") }}
+                    {{ form.facilitator_id(class="form-select") }}
+                    {% if form.facilitator_id.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.facilitator_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.duration_months.label(class="form-label") }}
+                    {{ form.duration_months(class="form-control", value=module.duration_months) }}
+                    {% if form.duration_months.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.duration_months.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                {{ form.submit(class="btn btn-gold") }}
+                <a href="{{ url_for('manage_modules') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
