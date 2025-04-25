@@ -1,4 +1,4 @@
-from flask import Flask,  send_file, render_template, request, redirect, url_for, session, flash
+from flask import Flask, app,  send_file, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 #from wtforms import StringField, PasswordField, SelectField, SubmitField
@@ -12,8 +12,11 @@ from wtforms import RadioField, StringField, SelectMultipleField, PasswordField,
 #from wtforms import StringField, PasswordField, SelectField, SubmitField, TextAreaField, IntegerField, DateTimeLocalField, BooleanField
 #from wtforms.validators import DataRequired, Length, EqualTo
 from flask_wtf.file import FileField, FileRequired, FileAllowed
+from . import db
+from flask import current_app
 
-app = Flask(__name__)
+
+
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_secret_key')
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
@@ -24,13 +27,14 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False  # Ensure SSL is disabled when using TLS
-app.config['MAIL_USERNAME'] = 'm48209921@gmail.com'  # Your Gmail address
-app.config['MAIL_PASSWORD'] = 'rufc leoy ymeb ywhm'  # Your Gmail app password
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+ # Your Gmail app password
 #app.config['MAIL_DEFAULT_SENDER'] = 'm48209921@gmail.com'
 
 
 mail = Mail(app)
-db = SQLAlchemy(app)  # Initialize db with the app
+  # Initialize db with the app
 
 
 

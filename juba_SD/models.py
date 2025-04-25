@@ -24,8 +24,8 @@ class User(db.Model):
         return f'<User {self.username}>'
 
 
-    class Module(db.Model):
-     id = db.Column(db.Integer, primary_key=True)
+class Module(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     module_name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text)
     pass_mark = db.Column(db.Integer, nullable=False)
@@ -33,6 +33,9 @@ class User(db.Model):
     duration_months = db.Column(db.Integer)
     files = db.relationship('ModuleFile', backref='module', lazy=True)
     students = db.relationship('User', secondary='enrollment', backref=db.backref('modules', lazy='dynamic'))
+
+    def __repr__(self):
+        return f'<Module {self.module_name}>'
 
 class ModuleFile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,4 +46,6 @@ class ModuleFile(db.Model):
 enrollment = db.Table('enrollment',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('module_id', db.Integer, db.ForeignKey('module.id'), primary_key=True)
+
+    
 )
