@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, redirect, url_for, session, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
-from models import db, User
+from .models import db, User
 
 profile_bp = Blueprint('profile', __name__, url_prefix='/profile')
 
