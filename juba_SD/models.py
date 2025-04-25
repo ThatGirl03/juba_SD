@@ -25,7 +25,7 @@ class User(db.Model):
 
 
     class Module(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+     id = db.Column(db.Integer, primary_key=True)
     module_name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text)
     pass_mark = db.Column(db.Integer, nullable=False)
