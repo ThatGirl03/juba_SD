@@ -12,7 +12,7 @@ from wtforms import RadioField, StringField, SelectMultipleField, PasswordField,
 #from wtforms import StringField, PasswordField, SelectField, SubmitField, TextAreaField, IntegerField, DateTimeLocalField, BooleanField
 #from wtforms.validators import DataRequired, Length, EqualTo
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from . import db
+from models import db
 from flask import current_app
 
 
@@ -992,8 +992,3 @@ def email_group():
 
 
 
-
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
