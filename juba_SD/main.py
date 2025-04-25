@@ -8,13 +8,13 @@ import os
 from datetime import datetime, timedelta
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
-from wtforms import StringField, SelectMultipleField, PasswordField, SelectField, SubmitField, TextAreaField, IntegerField, DateTimeLocalField, BooleanField
+from wtforms import RadioField, StringField, SelectMultipleField, PasswordField, SelectField, SubmitField, TextAreaField, IntegerField, DateTimeLocalField, BooleanField
 #from wtforms import StringField, PasswordField, SelectField, SubmitField, TextAreaField, IntegerField, DateTimeLocalField, BooleanField
 #from wtforms.validators import DataRequired, Length, EqualTo
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hack99slide_trojanhs32'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_secret_key')
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
